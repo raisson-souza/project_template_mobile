@@ -1,0 +1,1 @@
+Modelo de Projeto Frontend Mobile em React Native TS com EXPO
