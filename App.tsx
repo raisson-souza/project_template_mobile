@@ -8,6 +8,7 @@ import React from "react"
 
 /** Parâmetros da navegação por tab */
 export type TabNavigationParams = {
+  /** Componente Home da tabs */
   Home: undefined
 }
 
@@ -21,10 +22,9 @@ const TabNavigator = () => {
         name="Home"
         component={ Home }
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="home-outline" color={ color } size={ size } />
-          ),
+          tabBarIcon: ({ color, size }) => (<Icon name="home-outline" color={ color } size={ size } />),
           tabBarLabel: "Home",
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
@@ -33,7 +33,8 @@ const TabNavigator = () => {
 
 /** Parâmetros da navegação por stack */
 export type StackNavigationParams = {
-  Home: undefined
+  /** Navegação por tabs */
+  Tabs: undefined
 }
 
 const Stack = createStackNavigator<StackNavigationParams>()
@@ -41,9 +42,9 @@ const Stack = createStackNavigator<StackNavigationParams>()
 /** Componente de navegação por stack */
 const StackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Tabs">
       <Stack.Screen
-        name="Home"
+        name="Tabs"
         component={ TabNavigator }
         options={{ headerShown: false }}
       />
@@ -52,7 +53,8 @@ const StackNavigator = () => {
 }
 
 export type DrawerNavigationParams = {
-  Home: undefined
+  /** Primeira stack de navegação */
+  Stack: undefined
 }
 
 const Drawer = createDrawerNavigator<DrawerNavigationParams>()
@@ -60,8 +62,12 @@ const Drawer = createDrawerNavigator<DrawerNavigationParams>()
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={ StackNavigator } />
+      <Drawer.Navigator initialRouteName="Stack">
+        <Drawer.Screen
+          name="Stack"
+          component={ StackNavigator }
+          options={{ title: "Home" }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   )
