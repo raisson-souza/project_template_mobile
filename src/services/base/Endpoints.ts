@@ -64,7 +64,7 @@ export default abstract class Endpoints {
                 {
                     method: method,
                     headers: this.mountHeaders(headers, authorization),
-                    body: body
+                    body: JSON.stringify(body)
                 }
             )
                 .then(async (response) => {
