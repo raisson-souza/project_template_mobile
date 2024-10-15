@@ -3,8 +3,10 @@ import { createDrawerNavigator } from "@react-navigation/drawer"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Home } from "./src/screens/Home"
 import { NavigationContainer } from "@react-navigation/native"
+import { SQLiteProvider } from "expo-sqlite"
 import { StatusBar } from "expo-status-bar"
 import Icon from "react-native-vector-icons/Ionicons"
+import Migrations from "./db/migrations"
 import React from "react"
 
 /** Parâmetros da navegação por tab */
@@ -103,26 +105,31 @@ const drawerScreensStyle = {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <StatusBar
-        // backgroundColor="#"
-      />
-      <Drawer.Navigator
-        initialRouteName="Stack"
-        screenOptions={{
-          drawerStyle:{
-            /** Cor de fundo da section do drawer */
-            backgroundColor: "darkblue"
-          }
-        }}
-      >
-        <Drawer.Screen
-          name="Stack"
-          component={ StackNavigator }
-          options={{ ...drawerScreensStyle, title: "Home" }}
+    <SQLiteProvider
+      databaseName="database.db"
+      onInit={ Migrations }
+    >
+      <NavigationContainer>
+        <StatusBar
+          // backgroundColor="#"
         />
-      </Drawer.Navigator>
-    </NavigationContainer>
+        <Drawer.Navigator
+          initialRouteName="Stack"
+          screenOptions={{
+            drawerStyle:{
+              /** Cor de fundo da section do drawer */
+              backgroundColor: "darkblue"
+            }
+          }}
+        >
+          <Drawer.Screen
+            name="Stack"
+            component={ StackNavigator }
+            options={{ ...drawerScreensStyle, title: "Home" }}
+          />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </SQLiteProvider>
   )
 }
 
