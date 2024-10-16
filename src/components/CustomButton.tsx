@@ -3,7 +3,7 @@ import { DimensionValue, Pressable, Text, TextStyle, TouchableHighlight, Touchab
 export type CustomButtonProps = {
     title: string
     onPress: () => any
-    btnAnimation: "none" | "opacity" | "highlight" 
+    btnAnimation?: "none" | "opacity" | "highlight" 
     active?: boolean
     btnBackground?: string
     btnTextColor?: string
@@ -22,7 +22,7 @@ export type CustomButtonProps = {
 export default function CustomButton({
     title,
     onPress,
-    btnAnimation= "opacity",
+    btnAnimation = "opacity",
     active = true,
     btnBackground = "blue",
     btnTextColor = "white",
