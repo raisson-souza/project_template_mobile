@@ -9,6 +9,8 @@ type BiometricAuthButtonProps = {
     cancelAuthTitle?: string
     /** Título do botão PROP TEMPORÁRIA */
     btnTitle?: string
+    /** Permite autenticação por PIN */
+    allowPinAuth?: boolean
     /** Ação após sucesso */
     onSuccess?: () => any
     /** Ação após falha */
@@ -25,6 +27,7 @@ export default function BiometricAuthButton({
     authMessage = "Confirmar ação",
     cancelAuthTitle = "Cancelar",
     btnTitle = "Confirmar",
+    allowPinAuth = true,
     onSuccess = () => {},
     onFailure = () => {},
     authSuccess,
@@ -37,10 +40,10 @@ export default function BiometricAuthButton({
             promptMessage: authMessage,
             cancelLabel: cancelAuthTitle,
             biometricsSecurityLevel: "strong",
-            disableDeviceFallback: true,
+            disableDeviceFallback: !allowPinAuth,
         })
 
-        if (auth.success) {
+        if (auth.success || auth.warning === "KeyguardManager#isDeviceSecure() returned false") {
             setAuthSuccess(true)
             await onSuccess()
             return
