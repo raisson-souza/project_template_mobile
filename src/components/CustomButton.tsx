@@ -1,8 +1,9 @@
-import { DimensionValue, Pressable, Text, TextStyle } from "react-native"
+import { DimensionValue, Pressable, Text, TextStyle, TouchableHighlight, TouchableOpacity } from "react-native"
 
 export type CustomButtonProps = {
     title: string
     onPress: () => any
+    btnAnimation: "none" | "opacity" | "highlight" 
     active?: boolean
     btnBackground?: string
     btnTextColor?: string
@@ -21,6 +22,7 @@ export type CustomButtonProps = {
 export default function CustomButton({
     title,
     onPress,
+    btnAnimation= "opacity",
     active = true,
     btnBackground = "blue",
     btnTextColor = "white",
@@ -35,20 +37,47 @@ export default function CustomButton({
         fontSize: 16,
     },
 }: CustomButtonProps) {
+    const btnStyle: any = {
+        backgroundColor: active ? btnBackground : "gray",
+        width: btnWidth,
+        height: btnHeight,
+        borderRadius: btnBorder.radius,
+        borderWidth: btnBorder.px,
+        borderStyle: "solid",
+    }
+    const btnText = <Text style={{ color: btnTextColor, fontWeight: titleStyle.fontWeight, fontSize: titleStyle.fontSize, padding: 5 }}>{ title }</Text>
+
+    if (btnAnimation === "highlight") {
+        return (
+            <TouchableHighlight
+                style={ btnStyle }
+                disabled={ !active }
+                onPress={ async () => { await onPress() }}
+            >
+                { btnText }
+            </TouchableHighlight>
+        )
+    }
+
+    if (btnAnimation === "opacity") {
+        return (
+            <TouchableOpacity
+                style={ btnStyle }
+                disabled={ !active }
+                onPress={ async () => { await onPress() }}
+            >
+                { btnText }
+            </TouchableOpacity>
+        )
+    }
+
     return (
         <Pressable
-            style={{
-                backgroundColor: active ? btnBackground : "gray",
-                width: btnWidth,
-                height: btnHeight,
-                borderRadius: btnBorder.radius,
-                borderWidth: btnBorder.px,
-                borderStyle: "solid",
-            }}
+            style={ btnStyle }
             disabled={ !active }
             onPress={ async () => { await onPress() } }
         >
-            <Text style={{ color: btnTextColor, fontWeight: titleStyle.fontWeight, fontSize: titleStyle.fontSize, padding: 5 }}>{ title }</Text>
+            { btnText }
         </Pressable>
     )
 }
