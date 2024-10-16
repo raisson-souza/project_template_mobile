@@ -1,5 +1,5 @@
-import { Button } from "react-native"
 import * as LocalAuthentication from 'expo-local-authentication'
+import CustomButton, { CustomButtonProps } from "./CustomButton"
 import React from "react"
 
 type BiometricAuthButtonProps = {
@@ -7,8 +7,6 @@ type BiometricAuthButtonProps = {
     authMessage?: string
     /** Mensagem do botão para cancelar biometria */
     cancelAuthTitle?: string
-    /** Título do botão PROP TEMPORÁRIA */
-    btnTitle?: string
     /** Permite autenticação por PIN */
     allowPinAuth?: boolean
     /** Ação após sucesso */
@@ -20,18 +18,21 @@ type BiometricAuthButtonProps = {
     /** Set State do sucesso na autenticação */
     setAuthSuccess: React.Dispatch<React.SetStateAction<boolean>>
     /** Propriedade especial para as props do botão customizado */
-    btnProps?: never
+    btnProps?: CustomButtonProps
 }
 
 export default function BiometricAuthButton({
     authMessage = "Confirmar ação",
     cancelAuthTitle = "Cancelar",
-    btnTitle = "Confirmar",
     allowPinAuth = true,
     onSuccess = () => {},
     onFailure = () => {},
     authSuccess,
     setAuthSuccess,
+    btnProps = {
+        title: "Confirmar",
+        onPress: () => {},
+    },
 }: BiometricAuthButtonProps): JSX.Element {
     const onPress = async () => {
         if (authSuccess) return
@@ -52,11 +53,11 @@ export default function BiometricAuthButton({
         await onFailure()
     }
 
-    // TODO: Trocar botão pelo botão customizado
     return (
-        <Button
-            title={ btnTitle }
-            disabled={ authSuccess }
+        <CustomButton
+            { ...btnProps }
+            active={ !authSuccess }
+            title={ btnProps.title }
             onPress={ onPress }
         />
     )

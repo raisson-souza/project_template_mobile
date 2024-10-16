@@ -1,6 +1,6 @@
 import { DimensionValue, Pressable, Text, TextStyle } from "react-native"
 
-type CustomButtonProps = {
+export type CustomButtonProps = {
     title: string
     onPress: () => any
     active?: boolean
@@ -38,15 +38,15 @@ export default function CustomButton({
     return (
         <Pressable
             style={{
-                backgroundColor: btnBackground,
+                backgroundColor: active ? btnBackground : "gray",
                 width: btnWidth,
                 height: btnHeight,
                 borderRadius: btnBorder.radius,
                 borderWidth: btnBorder.px,
-                borderStyle: "solid"
+                borderStyle: "solid",
             }}
             disabled={ !active }
-            onPress={ onPress }
+            onPress={ async () => { await onPress() } }
         >
             <Text style={{ color: btnTextColor, fontWeight: titleStyle.fontWeight, fontSize: titleStyle.fontSize, padding: 5 }}>{ title }</Text>
         </Pressable>
