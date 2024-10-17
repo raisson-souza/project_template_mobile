@@ -1,24 +1,35 @@
 import { DimensionValue, Pressable, Text, TextStyle, TouchableHighlight, TouchableOpacity } from "react-native"
 
 export type CustomButtonProps = {
+    /** Título do botão */
     title: string
+    /** Ação realizada após clique no botão */
     onPress: () => any
+    /** Animação de clique no botão */
     btnAnimation?: "none" | "opacity" | "highlight" 
+    /** Botão ativo */
     active?: boolean
+    /** Cor de fundo do botão */
     btnBackground?: string
+    /** Cor do texto do botão */
     btnTextColor?: string
+    /** Largura do botão */
     btnWidth?: DimensionValue
+    /** Altura do botão */
     btnHeight?: DimensionValue
+    /** Estilo de borda do botão */
     btnBorder?: {
         radius?: number
         px?: number
     }
+    /** Estilo do texto */
     titleStyle?: {
         fontWeight: TextStyle["fontWeight"]
         fontSize: number
     }
 }
 
+/** Componente customizado para botão */
 export default function CustomButton({
     title,
     onPress,
