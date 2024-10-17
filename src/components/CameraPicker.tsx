@@ -1,34 +1,29 @@
-import React from "react"
-import { Alert, Button } from "react-native"
+import { Button } from "react-native"
+import { CustomButtonProps } from "./CustomButton"
 import * as ImagePicker from "expo-image-picker"
+import React from "react"
 
 export type ImagePickerImageProps = {
     base64?: string | null
     uri: string
     fileName?: string | null
     fileSizeBytes?: number
-    width: number
-    height: number
+    width?: number
+    height?: number
     mimeType?: string
 }
 
 type CameraLaunchProps = {
-    allowsEditing: boolean
-    aspect: [number, number]
-    quality: number
-    base64: boolean
-    allowsMultipleSelection: boolean
-    selectionLimit: number
-    cameraType: ImagePicker.CameraType
-    legacy: boolean
+    allowsEditing?: boolean
+    aspect?: [number, number]
+    quality?: number
+    cameraType?: "front" | "back"
 }
 
 type CameraPickerProps = {
     cameraLaunchProps?: CameraLaunchProps
-    images: ImagePickerImageProps[]
-    setImages: React.Dispatch<React.SetStateAction<ImagePickerImageProps[]>>
-    btnTitle?: string
-    btnProps?: never
+    setImage: React.Dispatch<React.SetStateAction<ImagePickerImageProps | null>>
+    btnProps?: CustomButtonProps
 }
 
 export default function CameraPicker({
@@ -36,19 +31,16 @@ export default function CameraPicker({
         allowsEditing: true,
         aspect: [4,3],
         quality: 0.3,
-        base64: true,
-        allowsMultipleSelection: false,
-        selectionLimit: 1,
-        cameraType: ImagePicker.CameraType.back,
-        legacy: false,
+        cameraType: "back",
     },
-    images,
-    setImages,
-    btnTitle = "Acessar Câmera",
+    setImage,
+    btnProps = {
+        title: "Acessar Câmera",
+        onPress: () => { },
+    },
 }: CameraPickerProps): JSX.Element {
     const onPress = async () => {
         const { granted } = await ImagePicker.requestCameraPermissionsAsync()
-        console.log("granted", granted)
 
         if (!granted) {
             alert("Permissão de uso de câmera negada.")
@@ -59,45 +51,24 @@ export default function CameraPicker({
             allowsEditing: cameraLaunchProps.allowsEditing,
             aspect: cameraLaunchProps.aspect,
             quality: cameraLaunchProps.quality,
-            base64: cameraLaunchProps.base64,
-            allowsMultipleSelection: cameraLaunchProps.allowsMultipleSelection,
-            selectionLimit: cameraLaunchProps.selectionLimit,
-            cameraType: cameraLaunchProps.cameraType,
-            legacy: cameraLaunchProps.legacy,
+            base64: true,
+            cameraType: cameraLaunchProps.cameraType === "back"
+                ? ImagePicker.CameraType.back
+                : ImagePicker.CameraType.front,
         })
-        console.log("result", result)
 
         if (!result.canceled) {
-            let images: ImagePickerImageProps[]
-
-            if (cameraLaunchProps.allowsMultipleSelection) {
-                images = result.assets.map(asset => {
-                    return {
-                        base64: asset.base64,
-                        uri: asset.uri,
-                        fileName: asset.fileName,
-                        fileSizeBytes: asset.fileSize,
-                        width: asset.width,
-                        height: asset.height,
-                        mimeType: asset.mimeType,
-                    } as ImagePickerImageProps
-                })
-            }
-            else {
-                images = [{
-                    base64: result.assets[0].base64,
-                    uri: result.assets[0].uri,
-                    fileName: result.assets[0].fileName,
-                    fileSizeBytes: result.assets[0].fileSize,
-                    width: result.assets[0].width,
-                    height: result.assets[0].height,
-                    mimeType: result.assets[0].mimeType,
-                }]
-            }
-
-            setImages(images)
+            setImage({
+                base64: result.assets[0].base64,
+                uri: result.assets[0].uri,
+                fileName: result.assets[0].fileName,
+                fileSizeBytes: result.assets[0].fileSize,
+                width: result.assets[0].width,
+                height: result.assets[0].height,
+                mimeType: result.assets[0].mimeType,
+            })
         }
     }
 
-    return <Button title={ btnTitle } onPress={ onPress } />
+    return <Button title={ btnProps.title } onPress={ onPress } />
 }
