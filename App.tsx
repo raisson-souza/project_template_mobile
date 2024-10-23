@@ -5,7 +5,9 @@ import { Home } from "./src/screens/Home"
 import { NavigationContainer } from "@react-navigation/native"
 import { SQLiteProvider } from "expo-sqlite"
 import { StatusBar } from "expo-status-bar"
+import AuthContextComponent from "./src/contexts/AuthContext"
 import Icon from "react-native-vector-icons/Ionicons"
+import InitialContextComponent from "./src/contexts/InitialContext"
 import Migrations from "./db/migrations"
 import React from "react"
 
@@ -109,26 +111,30 @@ const App = () => {
       databaseName="database.db"
       onInit={ Migrations }
     >
-      <NavigationContainer>
-        <StatusBar
-          // backgroundColor="#"
-        />
-        <Drawer.Navigator
-          initialRouteName="Stack"
-          screenOptions={{
-            drawerStyle:{
-              /** Cor de fundo da section do drawer */
-              backgroundColor: "darkblue"
-            }
-          }}
-        >
-          <Drawer.Screen
-            name="Stack"
-            component={ StackNavigator }
-            options={{ ...drawerScreensStyle, title: "Home" }}
-          />
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <InitialContextComponent>
+        <AuthContextComponent>
+          <NavigationContainer>
+            <StatusBar
+              // backgroundColor="#"
+            />
+            <Drawer.Navigator
+              initialRouteName="Stack"
+              screenOptions={{
+                drawerStyle:{
+                  /** Cor de fundo da section do drawer */
+                  backgroundColor: "darkblue"
+                }
+              }}
+            >
+              <Drawer.Screen
+                name="Stack"
+                component={ StackNavigator }
+                options={{ ...drawerScreensStyle, title: "Home" }}
+              />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </AuthContextComponent>
+      </InitialContextComponent>
     </SQLiteProvider>
   )
 }
