@@ -3,8 +3,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { Screen } from "../components/base/Screen"
 import { StackNavigationParams, TabNavigationParams } from "../../App"
 import { StackNavigationProp } from "@react-navigation/stack"
-import { StyleSheet, Button } from "react-native"
-import NotificationSender from "../utils/NotificationSender"
+import { StyleSheet, Text } from "react-native"
 import React from "react"
 
 type HomeStackUseNavigationProps = StackNavigationProp<StackNavigationParams, "Tabs">
@@ -21,12 +20,7 @@ export const Home: React.FC<{}> = ({ }) => {
 
     return (
         <Screen>
-            <Button
-                title="ENVIAR NOTIFICAÇÃO"
-                onPress={async () => {
-                    await NotificationSender({ title: "Cagaro" })
-                }}
-            />
+            <Text>Project Template Mobile</Text>
         </Screen>
     )
 }
