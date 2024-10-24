@@ -9,6 +9,7 @@ import AuthContextComponent from "./src/contexts/AuthContext"
 import Icon from "react-native-vector-icons/Ionicons"
 import InitialContextComponent from "./src/contexts/InitialContext"
 import Migrations from "./db/migrations"
+import NotificationEnclosure from "./src/components/base/NotificationEnclosure"
 import React from "react"
 
 /** Parâmetros da navegação por tab */
@@ -113,26 +114,28 @@ const App = () => {
     >
       <InitialContextComponent>
         <AuthContextComponent>
-          <NavigationContainer>
-            <StatusBar
-              // backgroundColor="#"
-            />
-            <Drawer.Navigator
-              initialRouteName="Stack"
-              screenOptions={{
-                drawerStyle:{
-                  /** Cor de fundo da section do drawer */
-                  backgroundColor: "darkblue"
-                }
-              }}
-            >
-              <Drawer.Screen
-                name="Stack"
-                component={ StackNavigator }
-                options={{ ...drawerScreensStyle, title: "Home" }}
+          <NotificationEnclosure>
+            <NavigationContainer>
+              <StatusBar
+                // backgroundColor="#"
               />
-            </Drawer.Navigator>
-          </NavigationContainer>
+              <Drawer.Navigator
+                initialRouteName="Stack"
+                screenOptions={{
+                  drawerStyle:{
+                    /** Cor de fundo da section do drawer */
+                    backgroundColor: "darkblue"
+                  }
+                }}
+              >
+                <Drawer.Screen
+                  name="Stack"
+                  component={ StackNavigator }
+                  options={{ ...drawerScreensStyle, title: "Home" }}
+                />
+              </Drawer.Navigator>
+            </NavigationContainer>
+          </NotificationEnclosure>
         </AuthContextComponent>
       </InitialContextComponent>
     </SQLiteProvider>
