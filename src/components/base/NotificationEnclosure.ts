@@ -7,8 +7,9 @@ type NotificationEnclosureProps = {
     children: JSX.Element | JSX.Element[]
 }
 
-async function registerForPushNotificationsAsync(): Promise<void> {
+async function getNotificationsPermission(): Promise<void> {
     if (Platform.OS === 'android') {
+        // Define um canal de notificações
         await Notifications.setNotificationChannelAsync('default', {
             name: 'default',
             importance: Notifications.AndroidImportance.MAX,
@@ -31,9 +32,14 @@ async function registerForPushNotificationsAsync(): Promise<void> {
     }
 }
 
+/**
+ * Componente responsável pela captura da permissão do envio de notificações no dispositivo.
+ * 
+ * Caso seja necessário implementar uma maneira de capturar mensagens do "data" na notificação
+ * será necessário transformar este componente em um context e armazenar os Notifications.Subscription
+ * em useRef conforme documentação do expo.
+*/
 export default function NotificationEnclosure({ children }: NotificationEnclosureProps) {
-    useEffect(() => { registerForPushNotificationsAsync() }, [])
-    console.log("NotificationEnclosure")
-
+    useEffect(() => { getNotificationsPermission() }, [])
     return children
 }

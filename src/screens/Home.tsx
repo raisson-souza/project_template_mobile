@@ -3,11 +3,9 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { Screen } from "../components/base/Screen"
 import { StackNavigationParams, TabNavigationParams } from "../../App"
 import { StackNavigationProp } from "@react-navigation/stack"
-import { Text, StyleSheet, View, Button, Platform } from "react-native"
-import { useState, useEffect, useRef } from 'react'
-import * as Notifications from 'expo-notifications'
-import React from "react"
+import { StyleSheet, Button } from "react-native"
 import NotificationSender from "../utils/NotificationSender"
+import React from "react"
 
 type HomeStackUseNavigationProps = StackNavigationProp<StackNavigationParams, "Tabs">
 type HomeStackUseRouteProps = RouteProp<StackNavigationParams, "Tabs">
@@ -23,20 +21,12 @@ export const Home: React.FC<{}> = ({ }) => {
 
     return (
         <Screen>
-            <View
-                style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'space-around',
+            <Button
+                title="ENVIAR NOTIFICAÇÃO"
+                onPress={async () => {
+                    await NotificationSender({ title: "Cagaro" })
                 }}
-            >
-                <Button
-                    title="ENVIAR NOTIFICAÇÃO"
-                    onPress={async () => {
-                        await NotificationSender({ title: "Cagaro" })
-                    }}
-                />
-            </View>
+            />
         </Screen>
     )
 }

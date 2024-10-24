@@ -28,6 +28,7 @@ export default async function NotificationSender({
         content: { // TODO: verificar outras props
             title: title,
             body: body,
+            data: {} // Configurar dados da notificação aqui caso seja necessário implementar captura destes dados
         },
         trigger: {
             seconds: awaitSeconds,
