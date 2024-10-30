@@ -1,5 +1,5 @@
 import { DeleteProps, GetProps, PostProps, PutProps, RequestHeader } from "./EndpointProps"
-import env from "../../config/env"
+import env from "../../../config/env"
 import Response from "./Response"
 
 export default abstract class Endpoints {
