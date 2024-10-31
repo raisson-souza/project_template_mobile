@@ -1,3 +1,4 @@
+import { Admin } from "./src/screens/Admin"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -11,6 +12,7 @@ import InitialContextComponent from "./src/contexts/InitialContext"
 import Migrations from "./db/migrations"
 import NotificationEnclosure from "./src/components/base/NotificationEnclosure"
 import React from "react"
+import SyncContextComponent from "./src/contexts/SyncContext"
 
 /** Parâmetros da navegação por tab */
 export type TabNavigationParams = {
@@ -91,6 +93,7 @@ const StackNavigator = () => {
 export type DrawerNavigationParams = {
   /** Primeira stack de navegação */
   Stack: undefined
+  Admin: undefined
 }
 
 const Drawer = createDrawerNavigator<DrawerNavigationParams>()
@@ -115,26 +118,33 @@ const App = () => {
       <InitialContextComponent>
         <AuthContextComponent>
           <NotificationEnclosure>
-            <NavigationContainer>
-              <StatusBar
-                // backgroundColor="#"
-              />
-              <Drawer.Navigator
-                initialRouteName="Stack"
-                screenOptions={{
-                  drawerStyle:{
-                    /** Cor de fundo da section do drawer */
-                    backgroundColor: "darkblue"
-                  }
-                }}
-              >
-                <Drawer.Screen
-                  name="Stack"
-                  component={ StackNavigator }
-                  options={{ ...drawerScreensStyle, title: "Home" }}
+            <SyncContextComponent>
+              <NavigationContainer>
+                <StatusBar
+                  // backgroundColor="#"
                 />
-              </Drawer.Navigator>
-            </NavigationContainer>
+                <Drawer.Navigator
+                  initialRouteName="Stack"
+                  screenOptions={{
+                    drawerStyle:{
+                      /** Cor de fundo da section do drawer */
+                      backgroundColor: "darkblue"
+                    }
+                  }}
+                >
+                  <Drawer.Screen
+                    name="Stack"
+                    component={ StackNavigator }
+                    options={{ ...drawerScreensStyle, title: "Home" }}
+                  />
+                  <Drawer.Screen
+                    name="Admin"
+                    component={ Admin }
+                    options={{ ...drawerScreensStyle, title: "Admin" }}
+                  />
+                </Drawer.Navigator>
+              </NavigationContainer>
+            </SyncContextComponent>
           </NotificationEnclosure>
         </AuthContextComponent>
       </InitialContextComponent>
