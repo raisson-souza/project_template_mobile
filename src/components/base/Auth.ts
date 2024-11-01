@@ -4,7 +4,12 @@ type AuthProps = {
     children: JSX.Element | JSX.Element[]
 }
 
-export default function Auth({ children }: AuthProps) {
+/**
+ * Componente responsável pelo controle de rotas autenticadas  
+ * Oferece redirecionamento ou outras tratativas quando usuário não autenticado  
+ * Necessita englobar o componente necessitado de autenticação
+ * */
+export default function Auth({ children }: AuthProps): JSX.Element | JSX.Element[] | void {
     const { isLogged } = AuthContextProvider()
 
     if (!isLogged) {
