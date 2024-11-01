@@ -33,7 +33,7 @@ export default function AuthContextComponent({ children }: AuthContextProps) {
 }
 
 export function AuthContextProvider() {
-    const initialContext = useContext(AuthContext)
-    if (!initialContext) throw new Error("AuthContext chamado fora do provider.")
-    return initialContext
+    const context = useContext(AuthContext)
+    if (!context) throw new Error("AuthContext chamado fora do provider.")
+    return context
 }

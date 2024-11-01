@@ -29,7 +29,7 @@ export default function InitialContextComponent({ children }: InitialContextProp
 }
 
 export function InitialContextProvider() {
-    const initialContext = useContext(InitialContext)
-    if (!initialContext) throw new Error("InitialContext chamado fora do provider.")
-    return initialContext
+    const context = useContext(InitialContext)
+    if (!context) throw new Error("InitialContext chamado fora do provider.")
+    return context
 }
