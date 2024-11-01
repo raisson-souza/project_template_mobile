@@ -25,7 +25,7 @@ type SyncContext = {
 
 const SyncContext = createContext<SyncContext | null>(null)
 
-/** Contexto especializado na verificação de conectividade e sincronização dos dados da aplicação */
+/** Context especializado na verificação de conectividade e sincronização dos dados da aplicação */
 export default function SyncContextComponent({ children }: SyncContextProps) {
     const isConnectedRef = useRef<boolean>(false)
     const isSyncingRef = useRef<boolean>(false)

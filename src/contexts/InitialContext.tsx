@@ -10,6 +10,7 @@ type InitialContext = {}
 
 const InitialContext = createContext<InitialContext | null>(null)
 
+/** Context especializado no tratamento / carregamento de dados iniciais da aplicação */
 export default function InitialContextComponent({ children }: InitialContextProps) {
     const [ loading, setLoading ] = useState<boolean>(false) // TODO: definir regra de negócio para loading
 
