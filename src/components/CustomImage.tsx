@@ -12,6 +12,7 @@ export type CustomImageProps = {
     height?: number
 }
 
+/** Componente customizado para exibição de imagens */
 export default function CustomImage({
     imageProps,
     alt,

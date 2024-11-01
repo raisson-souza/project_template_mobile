@@ -26,6 +26,7 @@ type CameraPickerProps = {
     btnProps?: CustomButtonProps
 }
 
+/** Botão acionador de câmera */
 export default function CameraPicker({
     cameraLaunchProps = {
         allowsEditing: true,

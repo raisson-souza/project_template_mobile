@@ -21,6 +21,10 @@ type BiometricAuthButtonProps = {
     btnProps?: CustomButtonProps
 }
 
+/**
+ * Botão com confirmação de autenticação dos dispositivo  
+ * Oferece autenticação com biometria e PIN
+ * */
 export default function BiometricAuthButton({
     authMessage = "Confirmar ação",
     cancelAuthTitle = "Cancelar",
