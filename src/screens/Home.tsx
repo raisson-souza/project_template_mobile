@@ -12,6 +12,7 @@ type HomeStackUseRouteProps = RouteProp<StackNavigationParams, "Tabs">
 type HomeTabUseNavigationProps = BottomTabNavigationProp<TabNavigationParams, "Home">
 type HomeTabUseRouteProps = RouteProp<TabNavigationParams, "Home">
 
+/** Tela home */
 export const Home: React.FC<{}> = ({ }) => {
     const stackNavigation = useNavigation<HomeStackUseNavigationProps>()
     const tabNavigation = useNavigation<HomeTabUseNavigationProps>()

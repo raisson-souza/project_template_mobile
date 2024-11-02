@@ -13,6 +13,10 @@ type AdminStackUseRouteProps = RouteProp<StackNavigationParams, "Tabs">
 type AdminTabUseNavigationProps = BottomTabNavigationProp<TabNavigationParams, "Home">
 type AdminTabUseRouteProps = RouteProp<TabNavigationParams, "Home">
 
+/**
+ * Tela do administrador  
+ * É autenticado
+ * */
 export const Admin: React.FC<{}> = ({ }) => {
     const stackNavigation = useNavigation<AdminStackUseNavigationProps>()
     const tabNavigation = useNavigation<AdminTabUseNavigationProps>()
