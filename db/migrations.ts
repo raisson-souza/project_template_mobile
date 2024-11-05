@@ -32,19 +32,17 @@ export default async function SqliteDbManager(db: SQLiteDatabase): Promise<void>
 
         if (newUserVersion === 0) {
             // POPULAR BANCO DE DADOS COM TABELAS DA VERSÃO 1 (utilizar transaction)
-            // await db.execAsync("")
             // newUserVersion = 1
         }
 
         if (newUserVersion === 1) {
             // POPULAR BANCO DE DADOS COM TABELAS DA VERSÃO 2 (utilizar transaction)
-            // await db.execAsync("")
             // newUserVersion = 2
         }
 
         // Nova versão do banco do usuário é aplicada
-        await db.execAsync(`PRAGMA version = ${ DATABASE_VERSION }`)
-        console.log(`BANCO DE DADOS ATUALIZADO v${ DATABASE_VERSION }`)
+        await db.execAsync(`PRAGMA user_version = ${ newUserVersion }`)
+        console.log(`BANCO DE DADOS ATUALIZADO v${ newUserVersion }`)
     } catch (ex) {
         console.log(`Ocorreu um erro ao atualizar o banco de dados: ${ (ex as Error).message }`)
     }
