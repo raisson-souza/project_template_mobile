@@ -10,6 +10,11 @@ type NotificationSenderProps = {
     appLogoBackgroundColor?: string
 }
 
+/**
+ * Função para criação e envio de notificações localmente  
+ * @param awaitSeconds Segundos de espera para o surgimento da notificação  
+ * @param appLogoBackgroundColor Cor de fundo da imagem do app (necessita ser em HEX)
+*/
 export default async function NotificationSender({
     title,
     subtitle = undefined,

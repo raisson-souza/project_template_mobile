@@ -9,9 +9,9 @@ import { StatusBar } from "expo-status-bar"
 import AuthContextComponent from "./src/contexts/AuthContext"
 import Icon from "react-native-vector-icons/Ionicons"
 import InitialContextComponent from "./src/contexts/InitialContext"
-import Migrations from "./db/migrations"
 import NotificationEnclosure from "./src/components/base/NotificationEnclosure"
 import React from "react"
+import SqliteDbManager from "./db/migrations"
 import SyncContextComponent from "./src/contexts/SyncContext"
 
 /** Parâmetros da navegação por tab */
@@ -113,7 +113,7 @@ const App = () => {
   return (
     <SQLiteProvider
       databaseName="database.db"
-      onInit={ Migrations }
+      onInit={ SqliteDbManager }
     >
       <InitialContextComponent>
         <AuthContextComponent>

@@ -28,6 +28,10 @@ type LocalStorageProps = {
     logoff: () => Promise<void>
 }
 
+/**
+ * Objeto customizável para controle de propriedades do localStorage (AsyncStorage no mobile)
+ * // TODO: modificar e adicionar novas propriedades caso necessário
+*/
 export const LocalStorage: LocalStorageProps = {
     apiToken: {
         async get() {
