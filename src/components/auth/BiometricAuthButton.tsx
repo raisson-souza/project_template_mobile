@@ -1,5 +1,5 @@
 import * as LocalAuthentication from 'expo-local-authentication'
-import CustomButton, { CustomButtonProps } from "./CustomButton"
+import CustomButton, { CustomButtonProps } from '../customs/CustomButton'
 import React from "react"
 
 type BiometricAuthButtonProps = {
