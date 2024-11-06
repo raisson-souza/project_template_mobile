@@ -1,4 +1,5 @@
 import { KeyboardTypeOptions, TextInput, View, TextInputProps, StyleSheet, Text, StyleProp, TextStyle } from "react-native"
+import { useState } from "react"
 
 type CustomInputProps = {
     /** Label do campo */
@@ -14,6 +15,11 @@ type CustomInputProps = {
     keyboardType?: KeyboardTypeOptions
     onChange?: (e: string) => any
     width?: number
+    /** Pinta a label e a borda do input quando em foco */
+    animationOnFocus?: boolean
+    animationOnFocusStyle?: {
+        color: string
+    }
 }
 
 /** Componente customizado para input */
@@ -26,9 +32,15 @@ export default function CustomInput({
     innerProps = {},
     inputStyle = {},
     keyboardType = "ascii-capable",
-    onChange = (e: string) => {},
+    onChange = (_: string) => {},
     width = 150,
+    animationOnFocus = true,
+    animationOnFocusStyle = {
+        color: "blue",
+    },
 }: CustomInputProps): JSX.Element {
+    const [ onFocus, setOnFocus ] = useState<boolean>(false)
+
     const input = <TextInput
             defaultValue={ defaultValue }
             editable={ active }
@@ -38,8 +50,13 @@ export default function CustomInput({
             style={{
                 borderWidth: 0.5,
                 width: width,
+                borderColor: animationOnFocus
+                    ? onFocus ? animationOnFocusStyle.color : 'black'
+                    : 'black',
                 ...inputStyle as any
             }}
+            onFocus={ () => { setOnFocus(true) } }
+            onBlur={ () => { setOnFocus(false) } }
             { ...innerProps }
         />
 
@@ -48,6 +65,9 @@ export default function CustomInput({
             <View style={ styles.container }>
                 <Text style={{
                     fontSize: 14,
+                    color: animationOnFocus
+                        ? onFocus ? animationOnFocusStyle.color : 'black'
+                        : 'black',
                     ...labelStyle as any
                 }}>{ label }</Text>
                 { input }
