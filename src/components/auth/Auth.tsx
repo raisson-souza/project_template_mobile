@@ -1,6 +1,6 @@
 import { AuthContextProvider } from "../../contexts/AuthContext"
-import { Screen } from "./Screen"
-import Loading from "./Loading"
+import { Screen } from "../base/Screen"
+import Loading from "../base/Loading"
 
 type AuthProps = {
     children: JSX.Element | JSX.Element[]

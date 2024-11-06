@@ -4,8 +4,8 @@ import { Screen } from "../components/base/Screen"
 import { StackNavigationParams, TabNavigationParams } from "../../App"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { StyleSheet, Text } from "react-native"
-import Auth from "../components/base/Auth"
 import React from "react"
+import Auth from "../components/auth/Auth"
 
 type AdminStackUseNavigationProps = StackNavigationProp<StackNavigationParams, "Tabs">
 type AdminStackUseRouteProps = RouteProp<StackNavigationParams, "Tabs">
