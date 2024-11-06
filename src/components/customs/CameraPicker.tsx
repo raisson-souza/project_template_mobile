@@ -1,6 +1,5 @@
-import { Button } from "react-native"
-import { CustomButtonProps } from "./CustomButton"
 import * as ImagePicker from "expo-image-picker"
+import CustomButton, { CustomButtonProps } from "./CustomButton"
 import React from "react"
 
 export type ImagePickerImageProps = {
@@ -71,5 +70,5 @@ export default function CameraPicker({
         }
     }
 
-    return <Button title={ btnProps.title } onPress={ onPress } />
+    return <CustomButton title={ btnProps.title } onPress={ onPress } />
 }
