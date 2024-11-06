@@ -1,6 +1,6 @@
-import { Modal, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
+import { Modal, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View, ModalProps } from "react-native"
 
-type CustomModalProps = { // TODO DOCUMENTAR
+type CustomModalProps = {
     /** Componentes dentro do modal */
     children: JSX.Element | JSX.Element[]
     /** O modal está ativo */
@@ -15,6 +15,8 @@ type CustomModalProps = { // TODO DOCUMENTAR
     canOutsideClickClose?: boolean
     /** Borra o fundo do modal */
     blurBackground?: boolean
+    /** Propriedades do Modal (irão sobrepor as outras) */
+    innerProps?: ModalProps
 }
 
 /** Componente customizado para modal */
@@ -26,12 +28,14 @@ export default function CustomModal({
     isTransparent = true,
     canOutsideClickClose = true,
     blurBackground = true,
+    innerProps = {},
 }: CustomModalProps) {
     return (
         <Modal
             visible={ visible }
             transparent={ isTransparent }
             animationType={ animationType }
+            { ...innerProps }
         >
             <TouchableOpacity
                 style={{ flex: 1 }}

@@ -1,4 +1,4 @@
-import { DimensionValue, Pressable, Text, TextStyle, TouchableHighlight, TouchableOpacity } from "react-native"
+import { DimensionValue, Pressable, Text, TextStyle, TouchableHighlight, TouchableOpacity, PressableProps, TouchableHighlightProps, TouchableOpacityProps } from "react-native"
 
 export type CustomButtonProps = {
     /** Título do botão */
@@ -27,6 +27,8 @@ export type CustomButtonProps = {
         fontWeight: TextStyle["fontWeight"]
         fontSize: number
     }
+    /** Propriedades do botão (irão sobrepor as outras) */
+    innerProps?: PressableProps | TouchableHighlightProps | TouchableOpacityProps
 }
 
 /** Componente customizado para botão */
@@ -47,6 +49,7 @@ export default function CustomButton({
         fontWeight: "bold",
         fontSize: 16,
     },
+    innerProps = {},
 }: CustomButtonProps) {
     const btnStyle: any = {
         backgroundColor: active ? btnBackground : "gray",
@@ -66,6 +69,7 @@ export default function CustomButton({
                 style={ btnStyle }
                 disabled={ !active }
                 onPress={ async () => { await onPress() }}
+                { ...innerProps as any }
             >
                 { btnText }
             </TouchableHighlight>
@@ -78,6 +82,7 @@ export default function CustomButton({
                 style={ btnStyle }
                 disabled={ !active }
                 onPress={ async () => { await onPress() }}
+                { ...innerProps as any }
             >
                 { btnText }
             </TouchableOpacity>
@@ -89,6 +94,7 @@ export default function CustomButton({
             style={ btnStyle }
             disabled={ !active }
             onPress={ async () => { await onPress() } }
+            { ...innerProps as any }
         >
             { btnText }
         </Pressable>

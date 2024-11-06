@@ -1,5 +1,5 @@
 import { ImagePickerImageProps } from "./CameraPicker"
-import { Text, Image } from "react-native"
+import { Text, Image, ImageProps } from "react-native"
 
 export type CustomImageProps = {
     /** Propriedades da imagem */
@@ -10,6 +10,8 @@ export type CustomImageProps = {
     showAlt?: boolean
     width?: number
     height?: number
+    /** Propriedades do Image (irão sobrepor as outras) */
+    innerProps?: ImageProps
 }
 
 /** Componente customizado para exibição de imagens */
@@ -18,7 +20,8 @@ export default function CustomImage({
     alt,
     showAlt = true,
     width = 200,
-    height = 200
+    height = 200,
+    innerProps = {},
 }: CustomImageProps) {
     if (imageProps) {
         return <Image
@@ -28,6 +31,7 @@ export default function CustomImage({
                 width: width,
                 height: height,
             }}
+            { ...innerProps }
         />
     }
 
