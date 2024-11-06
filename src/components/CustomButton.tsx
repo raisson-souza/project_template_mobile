@@ -55,6 +55,8 @@ export default function CustomButton({
         borderRadius: btnBorder.radius,
         borderWidth: btnBorder.px,
         borderStyle: "solid",
+        justifyContent: "center",
+        alignItems: "center",
     }
     const btnText = <Text style={{ color: btnTextColor, fontWeight: titleStyle.fontWeight, fontSize: titleStyle.fontSize, padding: 5 }}>{ title }</Text>
 
