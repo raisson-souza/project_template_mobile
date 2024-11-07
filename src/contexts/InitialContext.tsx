@@ -12,7 +12,9 @@ const InitialContext = createContext<InitialContext | null>(null)
 
 /** Context especializado no tratamento / carregamento de dados iniciais da aplicação */
 export default function InitialContextComponent({ children }: InitialContextProps) {
-    const [ loading, setLoading ] = useState<boolean>(false) // TODO: definir regra de negócio para loading
+    // TODO: Mantenha esse state como FALSE ou exclua este arquivo e o InitialContextComponent em App.tsx
+    // caso seu projeto não necessite desta funcionalidade
+    const [ loading, setLoading ] = useState<boolean>(false)
 
     if (loading) {
         return (

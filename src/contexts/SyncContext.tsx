@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useRef } from "react"
 import InternetInfo from "../utils/InternetInfo"
 
+// TODO: Exclua esse arquivo e SyncContextComponent em App.tsx caso seu projeto
+// não possua sincronização de dados
+
 type SyncContextProps = {
     children: JSX.Element | JSX.Element[]
 }

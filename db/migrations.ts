@@ -46,4 +46,9 @@ export default async function SqliteDbManager(db: SQLiteDatabase): Promise<void>
     } catch (ex) {
         console.log(`Ocorreu um erro ao atualizar o banco de dados: ${ (ex as Error).message }`)
     }
+    finally {
+        console.log()
+        console.warn("\tPROJETO MODELO PARA MOBILE\n\tValide as mudanças necessárias conforme a necessidade de seu projeto!\n\tPesquise por: TODO")
+        console.log()
+    }
 }
