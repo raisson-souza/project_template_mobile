@@ -22,6 +22,7 @@ export const Home: React.FC<{}> = ({ }) => {
     return (
         <Screen>
             <Text>Project Template Mobile</Text>
+            <Text>HOME</Text>
         </Screen>
     )
 }

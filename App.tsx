@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Home } from "./src/screens/Home"
+import { Login } from "./src/screens/Login"
 import { NavigationContainer } from "@react-navigation/native"
 import { SQLiteProvider } from "expo-sqlite"
 import { StatusBar } from "expo-status-bar"
@@ -94,6 +95,7 @@ export type DrawerNavigationParams = {
   /** Primeira stack de navegação */
   Stack: undefined
   Admin: undefined
+  Login: undefined
 }
 
 const Drawer = createDrawerNavigator<DrawerNavigationParams>()
@@ -141,6 +143,11 @@ const App = () => {
                     name="Admin"
                     component={ Admin }
                     options={{ ...drawerScreensStyle, title: "Admin" }}
+                  />
+                  <Drawer.Screen
+                    name="Login"
+                    component={ Login }
+                    options={{ ...drawerScreensStyle, title: "Login" }}
                   />
                 </Drawer.Navigator>
               </NavigationContainer>
