@@ -1,5 +1,9 @@
 # Modelo de Projeto Frontend Mobile em React Native TS com EXPO
 
+Utilize-se esse modelo de projeto para sua aplicação em React Native.  
+Valide as **mudanças necessárias** dentro desse modelo pesquisando por "TODO".  
+Dê uma estrela nesse repositório!
+
 ## Navegações implementadas
 - Navegação por Drawer;
 - Navegação por Stack;
@@ -12,9 +16,11 @@ Todas as navegações podem ser modificadas, trocadas ou eliminadas.
 - Componente customizável para imagem;
 - Componente customizável para modal;
 - Componente customizável para tela;
+- Componente customizável para input;
 - Componente de loading;
 - Tela pré definida para administrador;
 - Tela pré definida para home;
+- Tela pré definida para login;
 
 Os componentes customizáveis são de uso pronto e genérico.
 A tela de administrador possui exemplo de controle de autenticação.
