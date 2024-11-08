@@ -3,33 +3,28 @@ import env from "../../../config/env"
 import Response from "./Response"
 
 export default abstract class Endpoints {
-    /** Headers padrão das requisições */
-    private static defaultHeaders: RequestHeader = { 'Content-Type': 'application/json' }
+    /** Header padrão das requisições */
+    private static defaultHeader: RequestHeader = { 'Content-Type': 'application/json' }
 
     /**
      * Monta todos os headers de uma requisição
-     * @param headers Lista de headers de uma requisição
+     * @param requestHeaders Lista de headers de uma requisição
      * @param authorization Autorização da requisição
      * @returns Retorna uma sequência de headers
      */
-    private static mountHeaders = (headers: RequestHeader[], authorization?: string): RequestHeader => {
-        const requestHeaders: RequestHeader = {
-            Authorization: authorization
-                ? authorization
-                : ""
-        }
+    private static mountHeaders = (requestHeaders: RequestHeader[], authorization?: string): any => {
+        if (authorization)
+            requestHeaders.push({ "Authorization": authorization })
 
-        for (const header of headers) {
-            requestHeaders[header[0]] = header[1]
-        }
-
-        return requestHeaders
+        return requestHeaders.reduce((previousHeader, currentHeader) => {
+            return { ...previousHeader, ...currentHeader }
+        }, {} as any)
     }
 
     /** Requisição GET */
     protected static async Get<T>({
         url,
-        headers = [this.defaultHeaders],
+        headers = [this.defaultHeader],
         authorization = undefined
     }: GetProps): Promise<Response<T>> {
         try {
@@ -53,7 +48,7 @@ export default abstract class Endpoints {
     /** Requisição POST */
     protected static async Post<T>({
         url,
-        headers = [this.defaultHeaders],
+        headers = [this.defaultHeader],
         authorization = undefined,
         body = {},
         method = 'POST',
@@ -80,7 +75,7 @@ export default abstract class Endpoints {
     /** Requisição PUT */
     protected static async Put<T>({
         url,
-        headers = [this.defaultHeaders],
+        headers = [this.defaultHeader],
         authorization = undefined,
         body = {}
     }: PutProps): Promise<Response<T>> {
@@ -96,7 +91,7 @@ export default abstract class Endpoints {
     /** Requisição DELETE */
     protected static async Delete<T>({
         url,
-        headers = [this.defaultHeaders],
+        headers = [this.defaultHeader],
         authorization = undefined,
         body = {}
     }: DeleteProps): Promise<Response<T>> {
