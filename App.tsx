@@ -111,6 +111,9 @@ const drawerScreensStyle = {
   headerStyle: { backgroundColor: "darkblue" }
 }
 
+// Para a definição de cores específicas nas navegações será
+// necessário buscar o parâmetro nos componentes de navegação e rota
+
 const App = () => {
   return (
     <SQLiteProvider
