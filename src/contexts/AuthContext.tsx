@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { Screen } from "../components/base/Screen"
 import Loading from "../components/base/Loading"
 
@@ -10,6 +10,12 @@ type AuthContext = {
     isLogged: boolean
     /** Usando com o hook useTransition, pode não realizar um refresh no componente se necessário */
     setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
+    /** Função para login */
+    login: (credentials: any) => Promise<void>
+    /** Função para cadastro */
+    register: (credentials: any) => Promise<void>
+    /** Função para logoff */
+    logoff: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContext | null>(null)
@@ -20,7 +26,18 @@ export default function AuthContextComponent({ children }: AuthContextProps) {
     const [ loading, setLoading ] = useState<boolean>(false)
     const [ isLogged, setIsLogged ] = useState<boolean>(false)
 
-    // TODO: Implemente aqui - dentro de um UseEffect - a regra de negócio de autenticação de seu projeto
+    useEffect(() => {
+        // TODO: Implemente aqui a regra de negócio de autenticação inicial de seu projeto
+    }, [])
+
+    // TODO: Função para login dentro do AuthContext <-- Remover se necessário
+    const login = async (credentials: any): Promise<void> => { }
+
+    // TODO: Função para cadastro dentro do AuthContext <-- Remover se necessário
+    const register = async (credentials: any): Promise<void> => { }
+
+    // TODO: Função para logoff dentro do AuthContext <-- Remover se necessário
+    const logoff = async (): Promise<void> => { }
 
     if (loading) {
         return (
@@ -31,7 +48,13 @@ export default function AuthContextComponent({ children }: AuthContextProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ isLogged, setIsLogged }}>
+        <AuthContext.Provider value={{
+            isLogged,
+            setIsLogged,
+            login,
+            register,
+            logoff,
+        }}>
             { children }
         </AuthContext.Provider>
     )

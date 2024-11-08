@@ -118,13 +118,13 @@ const App = () => {
       onInit={ SqliteDbManager }
     >
       <InitialContextComponent>
-        <AuthContextComponent>
-          <NotificationEnclosure>
-            <SyncContextComponent>
-              <NavigationContainer>
-                <StatusBar
-                  // backgroundColor="#"
-                />
+        <NotificationEnclosure>
+          <NavigationContainer>
+            <StatusBar
+              // backgroundColor="#"
+            />
+            <AuthContextComponent>
+              <SyncContextComponent>
                 <Drawer.Navigator
                   initialRouteName="Stack"
                   screenOptions={{
@@ -150,10 +150,10 @@ const App = () => {
                     options={{ ...drawerScreensStyle, title: "Login" }}
                   />
                 </Drawer.Navigator>
-              </NavigationContainer>
-            </SyncContextComponent>
-          </NotificationEnclosure>
-        </AuthContextComponent>
+              </SyncContextComponent>
+            </AuthContextComponent>
+          </NavigationContainer>
+        </NotificationEnclosure>
       </InitialContextComponent>
     </SQLiteProvider>
   )
