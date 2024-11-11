@@ -2,6 +2,7 @@ import { Admin } from "./src/screens/Admin"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createDrawerNavigator } from "@react-navigation/drawer"
 import { createStackNavigator } from "@react-navigation/stack"
+import { Detail } from "./src/screens/Detail"
 import { Home } from "./src/screens/Home"
 import { Login } from "./src/screens/Login"
 import { NavigationContainer } from "@react-navigation/native"
@@ -64,6 +65,7 @@ const TabNavigator = () => {
 export type StackNavigationParams = {
   /** Navegação por tabs */
   Tabs: undefined
+  Detail: { info: string }
 }
 
 const Stack = createStackNavigator<StackNavigationParams>()
@@ -86,6 +88,10 @@ const StackNavigator = () => {
         name="Tabs"
         component={ TabNavigator }
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Detail"
+        component={ Detail }
       />
     </Stack.Navigator>
   )
